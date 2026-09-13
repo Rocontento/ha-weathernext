@@ -1,0 +1,12 @@
+{
+  "domain": "weathernext",
+  "name": "WeatherNext 3",
+  "codeowners": ["@Rocontento"],
+  "config_flow": true,
+  "documentation": "https://github.com/Rocontento/ha-weathernext",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/Rocontento/ha-weathernext/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

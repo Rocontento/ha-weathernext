@@ -1,0 +1,65 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "WeatherNext 3",
+        "description": "Introduce la ubicación y los datos del proyecto de Google Cloud donde has vinculado el dataset de WeatherNext desde Analytics Hub.",
+        "data": {
+          "name": "Nombre",
+          "latitude": "Latitud",
+          "longitude": "Longitud",
+          "project_id": "ID del proyecto de Google Cloud",
+          "dataset_id": "ID del dataset vinculado",
+          "table_id": "Tabla",
+          "bq_location": "Región de BigQuery",
+          "service_account_json": "JSON de la cuenta de servicio"
+        },
+        "data_description": {
+          "dataset_id": "El nombre que le diste al dataset al suscribirte a la publicación de WeatherNext en Analytics Hub.",
+          "table_id": "weathernext_3_0_0_0p1deg para la malla de ~10 km con todas las variables.",
+          "bq_location": "Debe coincidir con la región del dataset vinculado (normalmente US).",
+          "service_account_json": "Pega el contenido completo del fichero de clave. Necesita los roles BigQuery Job User y BigQuery Data Viewer."
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "BigQuery ha rechazado las credenciales. Revisa los permisos de la cuenta de servicio.",
+      "invalid_service_account": "El JSON de la cuenta de servicio no es válido.",
+      "cannot_connect": "No se ha podido consultar BigQuery.",
+      "table_not_found": "No se encuentra esa tabla. Comprueba el proyecto, el dataset y la región.",
+      "no_data": "La consulta no ha devuelto previsión para esas coordenadas.",
+      "invalid_project": "El ID de proyecto no es válido.",
+      "invalid_dataset": "El ID de dataset no es válido.",
+      "invalid_table": "El nombre de tabla no es válido."
+    },
+    "abort": {
+      "already_configured": "Ya existe una ubicación configurada en esas coordenadas."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Ajustes de WeatherNext",
+        "data": {
+          "horizon_hours": "Horizonte de previsión",
+          "update_interval_minutes": "Frecuencia de consulta",
+          "lookback_hours": "Ventana de pasadas del modelo"
+        },
+        "data_description": {
+          "horizon_hours": "Hasta 360 h (15 días). Menos horas significa menos datos leídos en BigQuery.",
+          "update_interval_minutes": "El modelo se actualiza cada hora; consultar más a menudo no aporta nada y gasta cuota.",
+          "lookback_hours": "Cuántas horas atrás se buscan pasadas del modelo. Las pasadas horarias llegan a 48 h y las de cada 6 h a 360 h, así que conviene abarcar al menos una pasada larga."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "precipitation_24h": { "name": "Precipitación 24 h" },
+      "precipitation_probability_24h": { "name": "Probabilidad de precipitación 24 h" },
+      "forecast_run": { "name": "Pasada del modelo" },
+      "last_query_bytes": { "name": "Datos leídos en la última consulta" },
+      "total_query_bytes": { "name": "Datos leídos acumulados" }
+    }
+  }
+}

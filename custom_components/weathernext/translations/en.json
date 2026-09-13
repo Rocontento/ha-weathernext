@@ -1,0 +1,65 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "WeatherNext 3",
+        "description": "Enter the location and the Google Cloud project where you linked the WeatherNext dataset from Analytics Hub.",
+        "data": {
+          "name": "Name",
+          "latitude": "Latitude",
+          "longitude": "Longitude",
+          "project_id": "Google Cloud project ID",
+          "dataset_id": "Linked dataset ID",
+          "table_id": "Table",
+          "bq_location": "BigQuery region",
+          "service_account_json": "Service account JSON"
+        },
+        "data_description": {
+          "dataset_id": "The name you gave the dataset when subscribing to the WeatherNext listing in Analytics Hub.",
+          "table_id": "weathernext_3_0_0_0p1deg for the ~10 km grid with all variables.",
+          "bq_location": "Must match the region of the linked dataset (usually US).",
+          "service_account_json": "Paste the full key file. It needs the BigQuery Job User and BigQuery Data Viewer roles."
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "BigQuery rejected the credentials. Check the service account permissions.",
+      "invalid_service_account": "The service account JSON is not valid.",
+      "cannot_connect": "Could not query BigQuery.",
+      "table_not_found": "Table not found. Check the project, dataset and region.",
+      "no_data": "The query returned no forecast for those coordinates.",
+      "invalid_project": "The project ID is not valid.",
+      "invalid_dataset": "The dataset ID is not valid.",
+      "invalid_table": "The table name is not valid."
+    },
+    "abort": {
+      "already_configured": "A location is already configured at those coordinates."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "WeatherNext settings",
+        "data": {
+          "horizon_hours": "Forecast horizon",
+          "update_interval_minutes": "Query interval",
+          "lookback_hours": "Model run lookback window"
+        },
+        "data_description": {
+          "horizon_hours": "Up to 360 h (15 days). Fewer hours means less data read in BigQuery.",
+          "update_interval_minutes": "The model updates hourly; querying more often adds nothing and burns quota.",
+          "lookback_hours": "How far back to look for model runs. Hourly runs reach 48 h and 6-hourly runs reach 360 h, so cover at least one long run."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "precipitation_24h": { "name": "Precipitation 24 h" },
+      "precipitation_probability_24h": { "name": "Precipitation probability 24 h" },
+      "forecast_run": { "name": "Model run" },
+      "last_query_bytes": { "name": "Data read in last query" },
+      "total_query_bytes": { "name": "Total data read" }
+    }
+  }
+}
