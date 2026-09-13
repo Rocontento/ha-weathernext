@@ -57,6 +57,9 @@ class WeatherNextConfigFlow(ConfigFlow, domain=DOMAIN):
 
     VERSION = 1
 
+    # Mensaje literal de Google del último fallo, para mostrarlo en el formulario.
+    _error_detail = ""
+
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
@@ -78,6 +81,7 @@ class WeatherNextConfigFlow(ConfigFlow, domain=DOMAIN):
             step_id="user",
             data_schema=self._schema(user_input),
             errors=errors,
+            description_placeholders={"error_detail": self._error_detail},
         )
 
     def _schema(self, user_input: dict[str, Any] | None) -> vol.Schema:
@@ -162,15 +166,16 @@ class WeatherNextConfigFlow(ConfigFlow, domain=DOMAIN):
                     named_param("horizon", "INT64", VALIDATION_HORIZON_HOURS),
                 ],
             )
-        except BigQueryAuthError as err:
-            _LOGGER.debug("BigQuery rechazó las credenciales: %s", err)
-            return {"base": "invalid_auth"}
-        except BigQueryNotFoundError as err:
-            _LOGGER.debug("Tabla no encontrada: %s", err)
-            return {"base": "table_not_found"}
         except BigQueryError as err:
-            _LOGGER.warning("Error consultando BigQuery: %s", err)
-            return {"base": "cannot_connect"}
+            if isinstance(err, BigQueryAuthError):
+                error = "invalid_auth"
+            elif isinstance(err, BigQueryNotFoundError):
+                error = "table_not_found"
+            else:
+                error = "cannot_connect"
+            self._error_detail = str(err)
+            _LOGGER.warning("Validación de BigQuery fallida (%s): %s", error, err)
+            return {"base": error}
 
         if not parse_rows(rows):
             return {"base": "no_data"}

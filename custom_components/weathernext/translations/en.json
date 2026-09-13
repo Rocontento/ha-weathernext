@@ -23,10 +23,10 @@
       }
     },
     "error": {
-      "invalid_auth": "BigQuery rejected the credentials. Check the service account permissions.",
+      "invalid_auth": "BigQuery rejected the credentials: {error_detail}",
       "invalid_service_account": "The service account JSON is not valid.",
-      "cannot_connect": "Could not query BigQuery.",
-      "table_not_found": "Table not found. Check the project, dataset and region.",
+      "cannot_connect": "Could not query BigQuery: {error_detail}",
+      "table_not_found": "Table not found. Check the project, dataset and region. Detail: {error_detail}",
       "no_data": "The query returned no forecast for those coordinates.",
       "invalid_project": "The project ID is not valid.",
       "invalid_dataset": "The dataset ID is not valid.",
@@ -55,11 +55,21 @@
   },
   "entity": {
     "sensor": {
-      "precipitation_24h": { "name": "Precipitation 24 h" },
-      "precipitation_probability_24h": { "name": "Precipitation probability 24 h" },
-      "forecast_run": { "name": "Model run" },
-      "last_query_bytes": { "name": "Data read in last query" },
-      "total_query_bytes": { "name": "Total data read" }
+      "precipitation_24h": {
+        "name": "Precipitation 24 h"
+      },
+      "precipitation_probability_24h": {
+        "name": "Precipitation probability 24 h"
+      },
+      "forecast_run": {
+        "name": "Model run"
+      },
+      "last_query_bytes": {
+        "name": "Data read in last query"
+      },
+      "total_query_bytes": {
+        "name": "Total data read"
+      }
     }
   }
 }

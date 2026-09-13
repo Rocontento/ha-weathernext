@@ -23,10 +23,10 @@
       }
     },
     "error": {
-      "invalid_auth": "BigQuery ha rechazado las credenciales. Revisa los permisos de la cuenta de servicio.",
+      "invalid_auth": "BigQuery ha rechazado las credenciales: {error_detail}",
       "invalid_service_account": "El JSON de la cuenta de servicio no es válido.",
-      "cannot_connect": "No se ha podido consultar BigQuery.",
-      "table_not_found": "No se encuentra esa tabla. Comprueba el proyecto, el dataset y la región.",
+      "cannot_connect": "No se ha podido consultar BigQuery: {error_detail}",
+      "table_not_found": "No se encuentra esa tabla. Comprueba el proyecto, el dataset y la región. Detalle: {error_detail}",
       "no_data": "La consulta no ha devuelto previsión para esas coordenadas.",
       "invalid_project": "El ID de proyecto no es válido.",
       "invalid_dataset": "El ID de dataset no es válido.",
@@ -55,11 +55,21 @@
   },
   "entity": {
     "sensor": {
-      "precipitation_24h": { "name": "Precipitación 24 h" },
-      "precipitation_probability_24h": { "name": "Probabilidad de precipitación 24 h" },
-      "forecast_run": { "name": "Pasada del modelo" },
-      "last_query_bytes": { "name": "Datos leídos en la última consulta" },
-      "total_query_bytes": { "name": "Datos leídos acumulados" }
+      "precipitation_24h": {
+        "name": "Precipitación 24 h"
+      },
+      "precipitation_probability_24h": {
+        "name": "Probabilidad de precipitación 24 h"
+      },
+      "forecast_run": {
+        "name": "Pasada del modelo"
+      },
+      "last_query_bytes": {
+        "name": "Datos leídos en la última consulta"
+      },
+      "total_query_bytes": {
+        "name": "Datos leídos acumulados"
+      }
     }
   }
 }
