@@ -93,7 +93,7 @@ class WeatherNextConfigFlow(ConfigFlow, domain=DOMAIN):
                     default=current.get(CONF_LATITUDE, self.hass.config.latitude),
                 ): selector.NumberSelector(
                     selector.NumberSelectorConfig(
-                        min=-90, max=90, step=0.0001, mode=selector.NumberSelectorMode.BOX
+                        min=-90, max=90, step="any", mode=selector.NumberSelectorMode.BOX
                     )
                 ),
                 vol.Required(
@@ -103,7 +103,7 @@ class WeatherNextConfigFlow(ConfigFlow, domain=DOMAIN):
                     selector.NumberSelectorConfig(
                         min=-180,
                         max=180,
-                        step=0.0001,
+                        step="any",
                         mode=selector.NumberSelectorMode.BOX,
                     )
                 ),
